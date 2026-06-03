@@ -583,3 +583,61 @@ export interface SvAuditLog {
   new_value: SvJson | null
   created_at: string
 }
+
+// === Asset Management ===
+export type AssetCategory = 'rope_access_gear' | 'height_safety' | 'tools' | 'electrical' | 'consumables' | 'plant' | 'vehicles' | 'job_kits'
+export type AssetStatus = 'available' | 'assigned' | 'on_job' | 'in_service' | 'broken' | 'retired' | 'lost' | 'quarantine'
+export type InspectionType = 'routine_ppe' | 'test_and_tag' | 'visual'
+export type InspectionResult = 'pass' | 'fail' | 'conditional_pass'
+export type AssignmentType = 'person' | 'vehicle' | 'storage_location' | 'job'
+
+export interface Asset {
+  id: string
+  item_number: string
+  asset_type: string
+  category: AssetCategory
+  manufacturer: string | null
+  model: string | null
+  serial_number: string | null
+  date_of_manufacture: string | null
+  date_of_purchase: string | null
+  date_of_first_use: string | null
+  date_of_retirement: string | null
+  status: AssetStatus
+  current_assignee_name: string | null
+  nfc_tag_id: string | null
+  barcode: string | null
+  metadata: Record<string, unknown> | null
+  comments: string | null
+  created_by: string
+  created_at: string
+  updated_at: string
+}
+
+export interface AssetInspection {
+  id: string
+  asset_id: string
+  inspection_type: InspectionType
+  result: InspectionResult
+  inspected_by: string
+  inspection_date: string
+  next_due_date: string | null
+  action_required: string | null
+  comments: string | null
+  photo_urls: string[] | null
+  created_at: string
+}
+
+export interface AssetAssignment {
+  id: string
+  asset_id: string
+  assigned_to_type: AssignmentType
+  assigned_to_id: string
+  assigned_to_name: string
+  job_id: string | null
+  checked_out_at: string
+  checked_in_at: string | null
+  processed_by: string
+  notes: string | null
+  created_at: string
+}

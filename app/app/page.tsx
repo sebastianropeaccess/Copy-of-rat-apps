@@ -16,6 +16,7 @@ const apps = [
   { name: 'Receipts', icon: 'receipt', color: 'bg-green-600', status: 'Active', href: '/receipts', appKey: 'receipts' },
   { name: 'Supervisor Review', icon: 'clipboard-check', color: 'bg-navy', status: 'Active', href: '/supervisor', appKey: 'supervisor' },
   { name: 'Toolbox Talk', icon: 'megaphone', color: 'bg-orange', status: 'Active', href: '/toolbox-talk', appKey: 'toolbox-talk' },
+  { name: 'Asset Management', icon: 'package', color: 'bg-amber-600', status: 'Active', href: '/assets', appKey: 'asset-management' },
   { name: 'Gear Registry', icon: 'shield', color: 'bg-purple-500', status: 'Active', href: '/gear', appKey: 'gear-registry' },
   { name: 'Broken Gear', icon: 'alert-tool', color: 'bg-red-600', status: 'Active', href: '/broken-gear', appKey: 'broken-gear' },
   { name: 'Leave Request', icon: 'calendar', color: 'bg-blue-500', status: 'Active', href: '/leave', appKey: 'leave-request' },
@@ -171,6 +172,14 @@ function AppIcon({ icon, className }: { icon: string; className?: string }) {
         <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M3 3v18h18" />
           <path d="M7 15l4-4 4 4 5-6" />
+        </svg>
+      )
+    case 'package':
+      return (
+        <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+          <line x1="12" y1="22.08" x2="12" y2="12" />
         </svg>
       )
     default:
