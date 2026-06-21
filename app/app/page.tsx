@@ -17,6 +17,7 @@ const apps = [
   { name: 'Supervisor Review', icon: 'clipboard-check', color: 'bg-navy', status: 'Active', href: '/supervisor', appKey: 'supervisor' },
   { name: 'Toolbox Talk', icon: 'megaphone', color: 'bg-orange', status: 'Active', href: '/toolbox-talk', appKey: 'toolbox-talk' },
   { name: 'Asset Management', icon: 'package', color: 'bg-amber-600', status: 'Active', href: '/assets', appKey: 'asset-management' },
+  { name: 'Inspections', icon: 'clipboard-check', color: 'bg-teal-600', status: 'Active', href: '/inspections', appKey: 'inspections' },
   { name: 'Gear Registry', icon: 'shield', color: 'bg-purple-500', status: 'Active', href: '/gear', appKey: 'gear-registry' },
   { name: 'Broken Gear', icon: 'alert-tool', color: 'bg-red-600', status: 'Active', href: '/broken-gear', appKey: 'broken-gear' },
   { name: 'Leave Request', icon: 'calendar', color: 'bg-blue-500', status: 'Active', href: '/leave', appKey: 'leave-request' },

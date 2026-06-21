@@ -239,7 +239,7 @@ export default function AssetDetailPage() {
           {/* Action buttons */}
           <div className="flex gap-3">
             <Link
-              href={`/assets/${asset.id}/inspect`}
+              href={`/inspections/${asset.id}`}
               className="flex-1 bg-orange text-white text-center font-semibold py-3 rounded-xl active:scale-95 transition-all duration-150 min-h-[48px] flex items-center justify-center text-sm"
             >
               Log Inspection
@@ -255,7 +255,7 @@ export default function AssetDetailPage() {
             )}
             {!openAssignment && (
               <Link
-                href="/assets/scan"
+                href="/assets/allocation"
                 className="flex-1 bg-navy text-white text-center font-semibold py-3 rounded-xl active:scale-95 transition-all duration-150 min-h-[48px] flex items-center justify-center text-sm"
               >
                 Assign

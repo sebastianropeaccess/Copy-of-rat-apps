@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { getSupabase } from '@/lib/supabase'
 import { getStoredUser } from '@/lib/helpers'
-import type { InspectionType, InspectionResult } from '@/lib/types'
+import type { Asset, InspectionType, InspectionResult, AssetInspection } from '@/lib/types'
 
 const INSPECTION_TYPES: { value: InspectionType; label: string; desc: string }[] = [
   { value: 'routine_ppe',  label: 'Routine PPE',  desc: 'Pre-use visual check' },
@@ -14,15 +14,39 @@ const INSPECTION_TYPES: { value: InspectionType; label: string; desc: string }[]
 ]
 
 const RESULTS: { value: InspectionResult; label: string; bg: string; border: string; text: string }[] = [
-  { value: 'pass',             label: 'Pass',             bg: 'bg-green-500', border: 'border-green-500', text: 'text-white' },
+  { value: 'pass',             label: 'Pass',             bg: 'bg-green-500',  border: 'border-green-500',  text: 'text-white' },
   { value: 'conditional_pass', label: 'Conditional Pass', bg: 'bg-yellow-500', border: 'border-yellow-500', text: 'text-white' },
-  { value: 'fail',             label: 'Fail',             bg: 'bg-red-500',   border: 'border-red-500',   text: 'text-white' },
+  { value: 'fail',             label: 'Fail',             bg: 'bg-red-500',    border: 'border-red-500',    text: 'text-white' },
 ]
 
-export default function InspectAssetPage() {
+const RESULT_CONFIG: Record<string, { label: string; bg: string; text: string }> = {
+  pass:             { label: 'Pass',             bg: 'bg-green-100',  text: 'text-green-700' },
+  fail:             { label: 'Fail',             bg: 'bg-red-100',    text: 'text-red-700' },
+  conditional_pass: { label: 'Conditional Pass', bg: 'bg-yellow-100', text: 'text-yellow-700' },
+}
+
+const INSPECTION_TYPE_LABELS: Record<string, string> = {
+  routine_ppe: 'Routine PPE', test_and_tag: 'Test & Tag', visual: 'Visual',
+}
+
+function formatDate(d: string | null) {
+  if (!d) return '—'
+  return new Date(d).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
+}
+
+function isOverdue(nextDue: string | null) {
+  if (!nextDue) return false
+  return new Date(nextDue) < new Date()
+}
+
+export default function LogInspectionPage() {
   const { assetId } = useParams<{ assetId: string }>()
   const router = useRouter()
   const user = getStoredUser()
+
+  const [asset, setAsset] = useState<Asset | null>(null)
+  const [history, setHistory] = useState<AssetInspection[]>([])
+  const [loading, setLoading] = useState(true)
 
   const today = new Date().toISOString().split('T')[0]
   const [inspType, setInspType] = useState<InspectionType>('routine_ppe')
@@ -35,16 +59,26 @@ export default function InspectAssetPage() {
   const [previews, setPreviews] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
 
-  if (!user) {
-    if (typeof window !== 'undefined') window.location.href = '/login'
-    return null
+  useEffect(() => {
+    if (!user) { window.location.href = '/login'; return }
+    loadAsset()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assetId])
+
+  async function loadAsset() {
+    const [{ data: a }, { data: h }] = await Promise.all([
+      getSupabase().from('assets').select('*').eq('id', assetId).single(),
+      getSupabase().from('asset_inspections').select('*').eq('asset_id', assetId).order('inspection_date', { ascending: false }).limit(5),
+    ])
+    setAsset(a)
+    setHistory((h || []) as AssetInspection[])
+    setLoading(false)
   }
 
   function addPhoto(file: File) {
     setPhotos(prev => [...prev, file])
     setPreviews(prev => [...prev, URL.createObjectURL(file)])
   }
-
   function removePhoto(idx: number) {
     setPhotos(prev => prev.filter((_, i) => i !== idx))
     setPreviews(prev => prev.filter((_, i) => i !== idx))
@@ -89,22 +123,42 @@ export default function InspectAssetPage() {
     }
 
     setSaving(false)
-    router.push(`/assets/${assetId}`)
+    router.push('/inspections')
   }
 
   const canSave = !!result && !!inspDate
+
+  if (!user) return null
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-light-gray">
+        <div className="w-8 h-8 border-3 border-orange border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
+  }
+  if (!asset) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-light-gray gap-4">
+        <div className="text-navy/50">Asset not found</div>
+        <Link href="/inspections" className="text-orange font-medium">Back to Inspections</Link>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-light-gray">
       <div className="w-full max-w-[480px] mx-auto flex flex-col min-h-screen">
         {/* Header */}
         <div className="bg-navy px-5 py-4 flex items-center gap-3 sticky top-0 z-10">
-          <Link href={`/assets/${assetId}`} className="text-white/60 active:scale-95 transition-transform">
+          <Link href="/inspections" className="text-white/60 active:scale-95 transition-transform">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 19l-7-7 7-7"/>
+              <path d="M15 19l-7-7 7-7" />
             </svg>
           </Link>
-          <div className="text-lg font-bold text-white">Log Inspection</div>
+          <div>
+            <div className="text-lg font-bold text-white">Log Inspection</div>
+            <div className="text-xs text-white/50">{asset.item_number} · {asset.asset_type}</div>
+          </div>
         </div>
 
         <div className="flex-1 px-4 py-4 pb-32 flex flex-col gap-4">
@@ -117,9 +171,7 @@ export default function InspectAssetPage() {
                   key={t.value}
                   onClick={() => setInspType(t.value)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl min-h-[56px] border-2 transition-all text-left ${
-                    inspType === t.value
-                      ? 'bg-navy border-navy text-white'
-                      : 'bg-white border-navy/10 text-navy active:scale-[0.98]'
+                    inspType === t.value ? 'bg-navy border-navy text-white' : 'bg-white border-navy/10 text-navy active:scale-[0.98]'
                   }`}
                 >
                   <div className={`w-4 h-4 rounded-full border-2 shrink-0 ${inspType === t.value ? 'bg-white border-white' : 'border-navy/30'}`} />
@@ -132,7 +184,7 @@ export default function InspectAssetPage() {
             </div>
           </div>
 
-          {/* Result — large buttons */}
+          {/* Result */}
           <div>
             <label className="block text-xs font-semibold text-navy/70 uppercase tracking-wide mb-2">Result *</label>
             <div className="flex gap-3">
@@ -141,13 +193,9 @@ export default function InspectAssetPage() {
                   key={r.value}
                   onClick={() => setResult(r.value)}
                   className={`flex-1 py-4 rounded-xl font-bold text-sm min-h-[64px] transition-all border-2 ${
-                    result === r.value
-                      ? `${r.bg} ${r.border} ${r.text} shadow-md`
-                      : 'bg-white border-navy/10 text-navy/50 active:scale-95'
+                    result === r.value ? `${r.bg} ${r.border} ${r.text} shadow-md` : 'bg-white border-navy/10 text-navy/50 active:scale-95'
                   }`}
-                >
-                  {r.label}
-                </button>
+                >{r.label}</button>
               ))}
             </div>
           </div>
@@ -157,40 +205,30 @@ export default function InspectAssetPage() {
             <div>
               <label className="block text-xs font-medium text-navy/70 mb-1">Inspection Date *</label>
               <input
-                type="date"
-                value={inspDate}
-                onChange={e => setInspDate(e.target.value)}
+                type="date" value={inspDate} onChange={e => setInspDate(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-navy/10 bg-white text-navy text-sm min-h-[48px] focus:outline-none focus:ring-2 focus:ring-orange/40"
               />
             </div>
             <div>
               <label className="block text-xs font-medium text-navy/70 mb-1">Next Due Date</label>
               <input
-                type="date"
-                value={nextDue}
-                onChange={e => setNextDue(e.target.value)}
+                type="date" value={nextDue} onChange={e => setNextDue(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-navy/10 bg-white text-navy text-sm min-h-[48px] focus:outline-none focus:ring-2 focus:ring-orange/40"
               />
             </div>
           </div>
 
-          {/* Action required — shown when fail or conditional */}
+          {/* Action required */}
           {(result === 'fail' || result === 'conditional_pass') && (
             <div>
               <label className="block text-xs font-medium text-navy/70 mb-1">Action Required</label>
               <input
-                type="text"
-                value={actionRequired}
-                onChange={e => setActionRequired(e.target.value)}
+                type="text" value={actionRequired} onChange={e => setActionRequired(e.target.value)}
                 placeholder="e.g. Remove from service, Send for repair"
                 className="w-full px-4 py-3 rounded-xl border border-navy/10 bg-white text-navy text-sm min-h-[48px] focus:outline-none focus:ring-2 focus:ring-orange/40"
               />
-              {result === 'fail' && (
-                <div className="mt-1 text-xs text-red-600 font-medium">Asset status will be set to Broken</div>
-              )}
-              {result === 'conditional_pass' && (
-                <div className="mt-1 text-xs text-yellow-700 font-medium">Asset status will be set to Quarantine</div>
-              )}
+              {result === 'fail' && <div className="mt-1 text-xs text-red-600 font-medium">Asset status will be set to Broken</div>}
+              {result === 'conditional_pass' && <div className="mt-1 text-xs text-yellow-700 font-medium">Asset status will be set to Quarantine</div>}
             </div>
           )}
 
@@ -198,9 +236,7 @@ export default function InspectAssetPage() {
           <div>
             <label className="block text-xs font-medium text-navy/70 mb-1">Comments</label>
             <textarea
-              value={comments}
-              onChange={e => setComments(e.target.value)}
-              rows={3}
+              value={comments} onChange={e => setComments(e.target.value)} rows={3}
               placeholder="Condition notes, observations..."
               className="w-full px-4 py-3 rounded-xl border border-navy/10 bg-white text-navy text-sm focus:outline-none focus:ring-2 focus:ring-orange/40 resize-none"
             />
@@ -214,29 +250,49 @@ export default function InspectAssetPage() {
                 {previews.map((src, i) => (
                   <div key={i} className="relative aspect-square">
                     <img src={src} alt="" className="w-full h-full object-cover rounded-xl border border-navy/10" />
-                    <button
-                      onClick={() => removePhoto(i)}
-                      className="absolute top-1 right-1 w-6 h-6 bg-black/50 text-white rounded-full flex items-center justify-center text-sm leading-none"
-                    >×</button>
+                    <button onClick={() => removePhoto(i)} className="absolute top-1 right-1 w-6 h-6 bg-black/50 text-white rounded-full flex items-center justify-center text-sm leading-none">×</button>
                   </div>
                 ))}
               </div>
             )}
             {photos.length < 6 && (
               <label className="flex items-center justify-center w-full min-h-[56px] px-4 py-3 rounded-xl border-2 border-dashed border-navy/20 bg-white text-navy/50 text-sm cursor-pointer active:scale-95 transition-all">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={e => { const f = e.target.files?.[0]; if (f) addPhoto(f); e.target.value = '' }}
-                  className="hidden"
-                />
+                <input type="file" accept="image/*" onChange={e => { const f = e.target.files?.[0]; if (f) addPhoto(f); e.target.value = '' }} className="hidden" />
                 + Add Photo
               </label>
             )}
           </div>
+
+          {/* Recent history (read-only, same unified table) */}
+          {history.length > 0 && (
+            <div>
+              <div className="text-xs font-semibold text-navy/50 uppercase tracking-wide mb-2">Recent Inspections</div>
+              <div className="flex flex-col gap-2">
+                {history.map(insp => {
+                  const rc = RESULT_CONFIG[insp.result] || RESULT_CONFIG.pass
+                  return (
+                    <div key={insp.id} className="bg-white rounded-xl shadow-sm p-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <div className="text-xs font-semibold text-navy">{INSPECTION_TYPE_LABELS[insp.inspection_type] || insp.inspection_type}</div>
+                          <div className="text-[10px] text-navy/40 mt-0.5">{formatDate(insp.inspection_date)} · {insp.inspected_by}</div>
+                        </div>
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${rc.bg} ${rc.text} shrink-0`}>{rc.label}</span>
+                      </div>
+                      {insp.next_due_date && (
+                        <div className={`text-[10px] font-medium mt-1 ${isOverdue(insp.next_due_date) ? 'text-red-600' : 'text-navy/50'}`}>
+                          Next due: {formatDate(insp.next_due_date)}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Save button */}
+        {/* Save */}
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-light-gray/90 backdrop-blur-sm">
           <div className="max-w-[480px] mx-auto">
             <button

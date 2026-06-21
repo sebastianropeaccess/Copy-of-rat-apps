@@ -637,6 +637,7 @@ export interface AssetAssignment {
   job_id: string | null
   checked_out_at: string
   checked_in_at: string | null
+  expected_return_date: string | null
   processed_by: string
   notes: string | null
   created_at: string

@@ -21,9 +21,17 @@ Field apps platform for Rope Access Technicians (ropeaccess.com.au). Used daily 
 - `SIMPRO_API_KEY` + `SIMPRO_BASE_URL` = (set in Vercel)
 
 ## Deploy
+The Next.js project root is the `app/` subdirectory (this folder), NOT the git repo root.
+There is no package.json at the repo root, so deploys MUST run from here.
 ```bash
+# Run from the app/ directory (this folder):
+cd app   # if you're at the repo root
 VERCEL_TOKEN="TU_VERCEL_TOKEN_AQUI" npx vercel --prod --yes
 ```
+If deploying via the Vercel dashboard / Git integration instead of the CLI,
+set Project Settings → Build & Deployment → **Root Directory = `app`**.
+Symptom of getting this wrong: deploy is "Ready" but every route (/, /login, /assets) 404s,
+because Vercel built from the repo root where there is no Next.js app.
 
 ## Auth System
 - **PIN-based login** — no email/password. Each team member has a 4-digit PIN.

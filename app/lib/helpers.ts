@@ -1,4 +1,29 @@
-import type { RatUser, ExternalUser } from './types'
+import type { RatUser, ExternalUser, Asset } from './types'
+
+// === Asset allocation queue (persisted so a half-built list survives an app close) ===
+const ALLOCATION_QUEUE_KEY = 'asset_allocation_queue'
+
+export function getAllocationQueue(): Asset[] {
+  if (typeof window === 'undefined') return []
+  try {
+    const raw = localStorage.getItem(ALLOCATION_QUEUE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? (parsed as Asset[]) : []
+  } catch {
+    return []
+  }
+}
+
+export function setAllocationQueue(assets: Asset[]): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(ALLOCATION_QUEUE_KEY, JSON.stringify(assets))
+}
+
+export function clearAllocationQueue(): void {
+  if (typeof window === 'undefined') return
+  localStorage.removeItem(ALLOCATION_QUEUE_KEY)
+}
 
 export function getDropLabel(index: number, labelling: 'alpha' | 'numeric'): string {
   if (labelling === 'numeric') return String(index + 1)
