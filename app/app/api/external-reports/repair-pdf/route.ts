@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PDFDocument, StandardFonts, rgb, type PDFPage } from 'pdf-lib'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabase } from '@/lib/supabase'
 import sharp from 'sharp'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 interface BuildingRow {
   id: number
@@ -328,6 +323,7 @@ async function drawDropPlans(
 }
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase()
   const searchParams = request.nextUrl.searchParams
   const buildingId = searchParams.get('buildingId')
   const defectFilter = searchParams.get('defectType') || ''

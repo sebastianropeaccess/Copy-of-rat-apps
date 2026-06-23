@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabase } from '@/lib/supabase'
 import { jsPDF } from 'jspdf'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 export const maxDuration = 60
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 type JsonMap = Record<string, unknown>
 type MediaRow = {
@@ -209,6 +204,7 @@ async function addMapSection(doc: jsPDF, title: string, data: JsonMap, media: Me
 }
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase()
   const inspectionId = request.nextUrl.searchParams.get('inspectionId')
   if (!inspectionId) return NextResponse.json({ error: 'inspectionId required' }, { status: 400 })
 

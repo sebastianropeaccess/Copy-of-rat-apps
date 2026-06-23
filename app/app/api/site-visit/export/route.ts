@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 export const maxDuration = 60
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 type MediaRow = {
   id: string
@@ -134,6 +129,7 @@ function safeName(value: string): string {
 }
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase()
   const inspectionId = request.nextUrl.searchParams.get('inspectionId')
   if (!inspectionId) return NextResponse.json({ error: 'inspectionId required' }, { status: 400 })
 

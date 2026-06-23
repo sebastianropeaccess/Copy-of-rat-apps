@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 30
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY?.startsWith('eyJ')
-    ? process.env.SUPABASE_SERVICE_ROLE_KEY
-    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+let _supabase: SupabaseClient | null = null
+function getBrokenGearClient() {
+  if (!_supabase) {
+    _supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY?.startsWith('eyJ')
+        ? process.env.SUPABASE_SERVICE_ROLE_KEY
+        : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+  }
+  return _supabase
+}
 
 type ReportPayload = {
   gear_item_id?: string | null
@@ -113,6 +119,7 @@ async function sendNotification(report: Required<Pick<ReportPayload, 'gear_make'
 }
 
 export async function POST(request: NextRequest) {
+  const supabase = getBrokenGearClient()
   try {
     const formData = await request.formData()
     const gearMake = cleanText(formData.get('gear_make'))
@@ -217,6 +224,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+  const supabase = getBrokenGearClient()
   try {
     const body = await request.json()
     if (!body.id) return NextResponse.json({ error: 'Report id is required.' }, { status: 400 })

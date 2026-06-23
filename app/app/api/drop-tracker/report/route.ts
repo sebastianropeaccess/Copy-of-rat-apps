@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 30
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 
 const TZ = 'Australia/Brisbane'
 
@@ -39,6 +34,7 @@ async function fetchImageAsBase64(url: string): Promise<{ data: string; type: st
 }
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase()
   const serviceId = request.nextUrl.searchParams.get('serviceId')
   if (!serviceId) return NextResponse.json({ error: 'Missing serviceId' }, { status: 400 })
 

@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+import { getSupabase } from '@/lib/supabase'
 
 interface RepairRow {
   id: number
@@ -111,6 +106,7 @@ async function fetchImageBase64(url: string): Promise<string | null> {
 }
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase()
   const { searchParams } = new URL(request.url)
   const buildingId = searchParams.get('buildingId')
   const format = searchParams.get('format') || 'json' // json or csv
