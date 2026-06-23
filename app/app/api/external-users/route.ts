@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 type ExternalRole = 'view_only' | 'allocate' | 'full'
 type ExternalViewLevel = 'summary' | 'detailed'
@@ -89,7 +89,7 @@ function validatePayload(payload: ExternalUserPayload, creating: boolean) {
   }
 }
 
-async function findAuthUserByEmail(supabase: ReturnType<typeof getAdminClient>, email: string) {
+async function findAuthUserByEmail(supabase: SupabaseClient, email: string) {
   let page = 1
   const perPage = 200
 
@@ -106,7 +106,7 @@ async function findAuthUserByEmail(supabase: ReturnType<typeof getAdminClient>, 
 }
 
 async function ensureAuthUser(
-  supabase: ReturnType<typeof getAdminClient>,
+  supabase: SupabaseClient,
   email: string,
   password: string | undefined,
   authorised: boolean,
