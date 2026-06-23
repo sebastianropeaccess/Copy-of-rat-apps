@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server'
 
 const SIMPRO_URL = 'https://ropeaccess.simprosuite.com'
-const SIMPRO_KEY = process.env.SIMPRO_API_KEY || '32f3591fddd0e6c85027e66281b7051bea191ce7'
+const SIMPRO_KEY = process.env.SIMPRO_API_KEY || ''
 
 export async function GET() {
   try {

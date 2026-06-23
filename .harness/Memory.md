@@ -24,3 +24,4 @@ Para proteger la ventana de contexto y evitar la redundancia, la memoria está d
 *Instrucciones de escritura: Al añadir un ítem, usa un formato ultra-corto (Ej: "[YYYY-MM-DD]: Regla XYZ"). No reescribas el archivo completo, usa comandos de terminal como `echo "- [Fecha]: Regla" >> .harness/Memory.md`.*
 
 - [2026-06-21]: Inicialización del sistema base de memoria. Separación de Memory.md (workflow) y CLAUDE.md (código) establecida.
+- [2026-06-21]: El token de Vercel se trunca al pasarlo a 'exec' vía env o --token; requiere intervención manual o un método alternativo de autenticación.
