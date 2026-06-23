@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { hubspotFetch } from '@/lib/hubspot'
+import { hubspotFetch } from '../../../../lib/hubspot'
 
 export const dynamic = 'force-dynamic'
 

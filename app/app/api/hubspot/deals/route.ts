@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { hubspotBatchRead, hubspotPaged, HubSpotObject } from '@/lib/hubspot'
+import { hubspotBatchRead, hubspotPaged, HubSpotObject } from '../../../../lib/hubspot'
 
 export const dynamic = 'force-dynamic'
 

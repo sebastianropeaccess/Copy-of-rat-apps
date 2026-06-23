@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PDFDocument, StandardFonts, rgb, type PDFPage } from 'pdf-lib'
-import { getSupabase } from '@/lib/supabase'
+import { getSupabase } from '../../../../lib/supabase'
 import sharp from 'sharp'
 
 export const dynamic = 'force-dynamic'
