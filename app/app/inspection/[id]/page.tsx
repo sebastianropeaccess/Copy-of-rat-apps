@@ -13,6 +13,36 @@ export default function InspectionDetailPage() {
   const [inspection, setInspection] = useState<FacadeInspection | null>(null)
   const [defects, setDefects] = useState<FacadeDefect[]>([])
   const [loading, setLoading] = useState(true)
+  const [generating, setGenerating] = useState(false)
+
+  async function handleGenerateReport() {
+    if (generating) return
+    setGenerating(true)
+    try {
+      const res = await fetch(`/api/inspection/report?inspectionId=${params.id}`)
+      if (!res.ok) {
+        const msg = await res.json().catch(() => ({}))
+        throw new Error(msg.error || `Report failed (${res.status})`)
+      }
+      const blob = await res.blob()
+      const disposition = res.headers.get('Content-Disposition') || ''
+      const match = disposition.match(/filename="([^"]+)"/)
+      const fileName = match ? match[1] : 'inspection_report.pdf'
+
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = fileName
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to generate report. Please try again.')
+    } finally {
+      setGenerating(false)
+    }
+  }
 
   const loadData = useCallback(async () => {
     const { data: insp } = await getSupabase()
@@ -153,8 +183,15 @@ export default function InspectionDetailPage() {
 
         {/* Generate Report */}
         {user.can_generate_reports && (
-          <button className="w-full bg-navy text-white font-bold py-3 rounded-lg min-h-[48px] mb-4 active:opacity-80">
-            Generate Report
+          <button
+            onClick={handleGenerateReport}
+            disabled={generating}
+            className="w-full bg-navy text-white font-bold py-3 rounded-lg min-h-[48px] mb-4 active:opacity-80 disabled:opacity-60 flex items-center justify-center gap-2"
+          >
+            {generating && (
+              <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+            )}
+            {generating ? 'Generating PDF…' : 'Generate Report (PDF)'}
           </button>
         )}
       </div>
