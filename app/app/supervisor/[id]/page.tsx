@@ -2,9 +2,9 @@
 
 import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { SupervisorReview } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { SupervisorReview } from '../../../lib/types'
 
 export default function SupervisorDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)

@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, ExternalUser, RepairBuilding } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, ExternalUser, RepairBuilding } from '../../../lib/types'
 
 type ExternalRole = 'view_only' | 'allocate' | 'full'
 type ExternalViewLevel = 'summary' | 'detailed'

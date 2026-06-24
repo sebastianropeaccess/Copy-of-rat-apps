@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { GearItem, RatUser } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { GearItem, RatUser } from '../../../lib/types'
 
 type JGIDJob = {
   id: string

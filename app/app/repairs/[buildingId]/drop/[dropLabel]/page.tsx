@@ -3,10 +3,10 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import { addToQueue, getQueue, processQueue } from '@/lib/offline'
-import type { RatUser, RepairBuilding, Repair } from '@/lib/types'
+import { getSupabase } from '../../../../../lib/supabase'
+import { getStoredUser } from '../../../../../lib/helpers'
+import { addToQueue, getQueue, processQueue } from '../../../../../lib/offline'
+import type { RatUser, RepairBuilding, Repair } from '../../../../../lib/types'
 
 type RepairExt = Repair & { urgency?: string; assigned_contractor?: string; _pending?: boolean; repair_steps?: { id: string }[] }
 

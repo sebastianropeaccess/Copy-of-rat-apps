@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { Service, RatUser, DropEntry } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { Service, RatUser, DropEntry } from '../../lib/types'
 
 const SERVICE_TYPES = [
   'Pressure Cleaning',

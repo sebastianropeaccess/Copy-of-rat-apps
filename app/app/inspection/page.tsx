@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { FacadeInspection, RatUser } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { FacadeInspection, RatUser } from '../../lib/types'
 
 interface InspectionWithDefects extends FacadeInspection {
   facade_defects: { id: string }[]

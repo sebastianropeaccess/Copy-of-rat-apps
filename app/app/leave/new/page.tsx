@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser } from '../../../lib/types'
 
 export default function NewLeaveRequestPage() {
   const [user, setUser] = useState<RatUser | null>(null)

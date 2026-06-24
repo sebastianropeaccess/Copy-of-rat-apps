@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, HssInspection } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { RatUser, HssInspection } from '../../lib/types'
 
 type InspectionWithAnchors = HssInspection & { hss_anchors: { id: string }[] }
 

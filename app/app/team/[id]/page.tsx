@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback, use } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, TeamMember } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, TeamMember } from '../../../lib/types'
 
 const ROLES = ['admin', 'manager', 'technician']
 

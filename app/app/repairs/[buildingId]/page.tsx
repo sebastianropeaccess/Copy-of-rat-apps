@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getDropLabel } from '@/lib/helpers'
-import type { RatUser, RepairBuilding, Repair } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser, getDropLabel } from '../../../lib/helpers'
+import type { RatUser, RepairBuilding, Repair } from '../../../lib/types'
 
 type RepairWithSteps = Repair & { repair_steps: { id: string }[] } & { urgency?: string; assigned_contractor?: string }
 

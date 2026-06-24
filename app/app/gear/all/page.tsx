@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, GearItem, GearInspection } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, GearItem, GearInspection } from '../../../lib/types'
 
 function getInspectionStatus(inspections: GearInspection[]): { label: string; color: string } {
   if (inspections.length === 0) return { label: 'No Inspection', color: 'bg-gray-200 text-gray-600' }

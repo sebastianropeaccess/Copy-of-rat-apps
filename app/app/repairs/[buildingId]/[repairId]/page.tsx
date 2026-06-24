@@ -3,10 +3,10 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, isVideoUrl } from '@/lib/helpers'
-import { addToQueue, processQueue } from '@/lib/offline'
-import type { RatUser, Repair, RepairStep } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser, isVideoUrl } from '../../../../lib/helpers'
+import { addToQueue, processQueue } from '../../../../lib/offline'
+import type { RatUser, Repair, RepairStep } from '../../../../lib/types'
 
 const SUB_TYPE_MAP: Record<string, string[]> = {
   'Concrete': ['Bar End', 'Cracking', 'Fixings', 'Patch Needed', 'Rust Spot', 'Spalling', 'Other'],

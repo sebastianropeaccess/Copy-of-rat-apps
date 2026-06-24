@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, GearItem } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, GearItem } from '../../../lib/types'
 
 async function scanNFC(): Promise<string | null> {
   if (!('NDEFReader' in window)) return null

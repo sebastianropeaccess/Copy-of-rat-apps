@@ -3,9 +3,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getDropLabel } from '@/lib/helpers'
-import type { FacadeInspection, FacadeDefect, RatUser } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser, getDropLabel } from '../../../lib/helpers'
+import type { FacadeInspection, FacadeDefect, RatUser } from '../../../lib/types'
 
 export default function InspectionDetailPage() {
   const params = useParams<{ id: string }>()

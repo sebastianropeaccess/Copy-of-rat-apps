@@ -3,9 +3,9 @@
 import { useEffect, useState, useCallback, use } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { DropEntry, DropPhoto, RatUser } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser } from '../../../../lib/helpers'
+import type { DropEntry, DropPhoto, RatUser } from '../../../../lib/types'
 
 
 function getLocalDate(d: Date = new Date()): string {

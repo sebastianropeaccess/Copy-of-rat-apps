@@ -3,9 +3,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { TeamMember } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { TeamMember } from '../../../lib/types'
 import SignatureCanvas from '../components/SignatureCanvas'
 import jsPDF from 'jspdf'
 

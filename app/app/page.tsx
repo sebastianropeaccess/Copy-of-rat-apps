@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser, clearStoredUser } from '@/lib/helpers'
-import type { RatUser } from '@/lib/types'
+import { getStoredUser, clearStoredUser } from '../lib/helpers'
+import type { RatUser } from '../lib/types'
 
 const apps = [
   { name: 'Ops Dashboard', icon: 'dashboard', color: 'bg-navy', status: 'Active', href: '/dashboard', appKey: 'dashboard' },

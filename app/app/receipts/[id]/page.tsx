@@ -2,9 +2,9 @@
 
 import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { PurchaseReceipt } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { PurchaseReceipt } from '../../../lib/types'
 
 function getReceiptDate(receipt: PurchaseReceipt) {
   return receipt.date_of_purchase || receipt.date || ''

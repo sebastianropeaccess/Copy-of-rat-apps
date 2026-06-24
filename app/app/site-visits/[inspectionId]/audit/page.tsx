@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { RatUser, SvAuditLog, SvInspection } from '@/lib/types'
+import { getStoredUser } from '../../../../lib/helpers'
+import { getSupabase } from '../../../../lib/supabase'
+import type { RatUser, SvAuditLog, SvInspection } from '../../../../lib/types'
 
 function formatValue(value: unknown) {
   if (value === null || value === undefined) return 'blank'

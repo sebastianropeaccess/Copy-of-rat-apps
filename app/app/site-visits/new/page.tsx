@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { RatUser, SvCompany, SvProperty, TeamMember } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { RatUser, SvCompany, SvProperty, TeamMember } from '../../../lib/types'
 
 type StartMode = 'hubspot' | 'new'
 type HubSpotDeal = {

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, AssetAssignment } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser } from '../../../../lib/helpers'
+import type { RatUser, AssetAssignment } from '../../../../lib/types'
 
 type AssignmentRow = AssetAssignment & {
   assets: { item_number: string; asset_type: string } | null

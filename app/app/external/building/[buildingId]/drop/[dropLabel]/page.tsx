@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredExternalUser, isVideoUrl } from '@/lib/helpers'
-import type { ExternalUser, RepairBuilding, Repair, RepairStep } from '@/lib/types'
+import { getSupabase } from '../../../../../../lib/supabase'
+import { getStoredExternalUser, isVideoUrl } from '../../../../../../lib/helpers'
+import type { ExternalUser, RepairBuilding, Repair, RepairStep } from '../../../../../../lib/types'
 
 type RepairWithSteps = Repair & { repair_steps: RepairStep[] } & { urgency?: string; assigned_contractor?: string }
 

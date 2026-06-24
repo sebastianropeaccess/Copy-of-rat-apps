@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { RatUser, SvCompany, SvDeal, SvInspection, SvInspectionMedia, TeamMember } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { RatUser, SvCompany, SvDeal, SvInspection, SvInspectionMedia, TeamMember } from '../../../lib/types'
 
 type JsonMap = Record<string, unknown>
 type InspectionRow = SvInspection & {

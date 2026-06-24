@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { RatUser, SvCompany, SvDeal, SvInspection, SvProperty, TeamMember } from '@/lib/types'
+import { getStoredUser } from '../../lib/helpers'
+import { getSupabase } from '../../lib/supabase'
+import type { RatUser, SvCompany, SvDeal, SvInspection, SvProperty, TeamMember } from '../../lib/types'
 
 type StatusFilter = 'all' | 'enquiry' | 'site_visit_scheduled' | 'site_visit_in_progress' | 'inspection_complete' | 'quoted'
 type InspectionRow = SvInspection & {

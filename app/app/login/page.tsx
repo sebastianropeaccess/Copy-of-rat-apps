@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import type { TeamMember, ExternalUser } from '@/lib/types'
-import { getStoredUser, getStoredExternalUser, setStoredExternalUser } from '@/lib/helpers'
+import { getSupabase } from '../../lib/supabase'
+import type { TeamMember, ExternalUser } from '../../lib/types'
+import { getStoredUser, getStoredExternalUser, setStoredExternalUser } from '../../lib/helpers'
 
 export default function LoginPage() {
   const [members, setMembers] = useState<TeamMember[]>([])

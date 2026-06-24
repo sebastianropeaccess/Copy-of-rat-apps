@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getAllocationQueue, clearAllocationQueue } from '@/lib/helpers'
-import type { RatUser, Asset } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser, getAllocationQueue, clearAllocationQueue } from '../../../../lib/helpers'
+import type { RatUser, Asset } from '../../../../lib/types'
 
 type Member = { id: string; name: string }
 type Vehicle = { id: string; name: string; rego: string | null }

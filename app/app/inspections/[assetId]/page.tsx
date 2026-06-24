@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { Asset, InspectionType, InspectionResult, AssetInspection } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { Asset, InspectionType, InspectionResult, AssetInspection } from '../../../lib/types'
 
 const INSPECTION_TYPES: { value: InspectionType; label: string; desc: string }[] = [
   { value: 'routine_ppe',  label: 'Routine PPE',  desc: 'Pre-use visual check' },

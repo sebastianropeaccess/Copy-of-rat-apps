@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser, isVideoUrl } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { BrokenGearReport, RatUser } from '@/lib/types'
+import { getStoredUser, isVideoUrl } from '../../lib/helpers'
+import { getSupabase } from '../../lib/supabase'
+import type { BrokenGearReport, RatUser } from '../../lib/types'
 
 const STATUS_OPTIONS = [
   { value: 'reported', label: 'Reported' },

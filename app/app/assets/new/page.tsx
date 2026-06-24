@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { AssetCategory } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { AssetCategory } from '../../../lib/types'
 
 const CATEGORIES: { value: AssetCategory; label: string }[] = [
   { value: 'rope_access_gear', label: 'Rope Access Gear' },

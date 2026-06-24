@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, RepairBuilding } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { RatUser, RepairBuilding } from '../../lib/types'
 
 const ALL_LOCATIONS = ['Column', 'Door', 'Floor', 'Hob', 'Parapet Wall', 'Planter Box', 'Rooftop', 'Screen', 'Slab End', 'Slab Top', 'Soffit', 'Sunhood Top', 'Wall', 'Window', 'Other']
 const ALL_DEFECT_TYPES = ['Concrete', 'Caulking', 'Coatings', 'Waterproofing', 'Windows & Doors', 'Screens, Fins & Hoods', 'Spitters', 'Brick Work', 'Cleaning', 'Installation', 'Other']

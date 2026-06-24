@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, Asset, AssetInspection, AssetAssignment } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, Asset, AssetInspection, AssetAssignment } from '../../../lib/types'
 
 const STATUS_CONFIG: Record<string, { label: string; bg: string; text: string }> = {
   available:  { label: 'Available',  bg: 'bg-green-100',  text: 'text-green-700' },

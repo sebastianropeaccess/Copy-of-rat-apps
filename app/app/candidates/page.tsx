@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, Candidate } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { RatUser, Candidate } from '../../lib/types'
 
 const STATUS_FILTERS = ['all', 'new', 'screened', 'shortlisted', 'phone_interview', 'in_person', 'hired', 'pool', 'rejected'] as const
 type StatusFilter = typeof STATUS_FILTERS[number]

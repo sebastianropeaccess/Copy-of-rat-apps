@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, Asset, AssetInspection } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, Asset, AssetInspection } from '../../../lib/types'
 
 const CATEGORIES = [
   { value: 'rope_access_gear', label: 'Rope Access' },

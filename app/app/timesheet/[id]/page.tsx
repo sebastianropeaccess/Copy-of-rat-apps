@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { Timesheet, TimesheetEntry, TimesheetMaterial } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { Timesheet, TimesheetEntry, TimesheetMaterial } from '../../../lib/types'
 
 export default function ViewTimesheetPage() {
   const params = useParams()

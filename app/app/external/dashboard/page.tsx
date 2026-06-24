@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredExternalUser, clearStoredExternalUser } from '@/lib/helpers'
-import type { ExternalUser, RepairBuilding } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredExternalUser, clearStoredExternalUser } from '../../../lib/helpers'
+import type { ExternalUser, RepairBuilding } from '../../../lib/types'
 
 export default function ExternalDashboardPage() {
   const [extUser, setExtUser] = useState<ExternalUser | null>(null)

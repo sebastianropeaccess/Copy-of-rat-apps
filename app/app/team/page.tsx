@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback, type ReactNode } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, TeamMember } from '@/lib/types'
+import { getSupabase } from '../../lib/supabase'
+import { getStoredUser } from '../../lib/helpers'
+import type { RatUser, TeamMember } from '../../lib/types'
 
 export default function TeamDirectoryPage() {
   const [user] = useState<RatUser | null>(() => getStoredUser())

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, FacadeInspection, FacadeDefect } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, FacadeInspection, FacadeDefect } from '../../../lib/types'
 
 function getPresetSteps(defectType: string): string[] {
   const key = defectType.toLowerCase()

@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getStoredExternalUser, getStoredUser, getDropLabel } from '@/lib/helpers'
-import type { ExternalUser, RatUser, RepairBuilding, Repair } from '@/lib/types'
+import { getStoredExternalUser, getStoredUser, getDropLabel } from '../../../../../lib/helpers'
+import type { ExternalUser, RatUser, RepairBuilding, Repair } from '../../../../../lib/types'
 
 type RepairExt = Repair & { urgency?: string; assigned_contractor?: string }
 
@@ -59,7 +59,7 @@ export default function ExternalReportPage() {
   }
 
   async function fetchBuilding() {
-    const { getSupabase } = await import('@/lib/supabase')
+    const { getSupabase } = await import('../../../../../lib/supabase')
     return getSupabase()
       .from('repair_buildings')
       .select('*')
@@ -68,7 +68,7 @@ export default function ExternalReportPage() {
   }
 
   async function fetchRepairs() {
-    const { getSupabase } = await import('@/lib/supabase')
+    const { getSupabase } = await import('../../../../../lib/supabase')
     return getSupabase()
       .from('repairs')
       .select('*')

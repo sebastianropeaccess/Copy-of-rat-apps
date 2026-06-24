@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SyncIndicator from "@/lib/SyncIndicator";
+import SyncIndicator from "../lib/SyncIndicator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

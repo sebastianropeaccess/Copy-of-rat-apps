@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser } from '@/lib/types'
+import { getStoredUser } from '../../lib/helpers'
+import type { RatUser } from '../../lib/types'
 
 interface SiteVisit {
   id: string

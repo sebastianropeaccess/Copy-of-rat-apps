@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { Timesheet } from '@/lib/types'
+import { getStoredUser } from '../../lib/helpers'
+import { getSupabase } from '../../lib/supabase'
+import type { Timesheet } from '../../lib/types'
 
 export default function TimesheetHistoryPage() {
   const [timesheets, setTimesheets] = useState<(Timesheet & { entry_count: number; total_hours: number })[]>([])

@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredExternalUser, getDropLabel } from '@/lib/helpers'
-import type { ExternalUser, RepairBuilding, Repair } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredExternalUser, getDropLabel } from '../../../../lib/helpers'
+import type { ExternalUser, RepairBuilding, Repair } from '../../../../lib/types'
 
 type RepairExt = Repair & { urgency?: string; assigned_contractor?: string }
 

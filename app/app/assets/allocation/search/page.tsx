@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getAllocationQueue, setAllocationQueue } from '@/lib/helpers'
-import type { RatUser, Asset } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser, getAllocationQueue, setAllocationQueue } from '../../../../lib/helpers'
+import type { RatUser, Asset } from '../../../../lib/types'
 
 const CATEGORIES = [
   { value: 'rope_access_gear', label: 'Rope Access' },

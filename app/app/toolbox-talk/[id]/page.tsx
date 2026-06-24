@@ -2,9 +2,9 @@
 
 import { useEffect, useState, use } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, ToolboxTalk, ToolboxTalkSignon } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, ToolboxTalk, ToolboxTalkSignon } from '../../../lib/types'
 
 export default function ToolboxTalkDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)

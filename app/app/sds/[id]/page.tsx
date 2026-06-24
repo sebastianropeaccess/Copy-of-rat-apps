@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
+import { getStoredUser } from '../../../lib/helpers'
 
 interface Product {
   id: string

@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { Asset, AssetStatus } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser } from '../../../../lib/helpers'
+import type { Asset, AssetStatus } from '../../../../lib/types'
 
 const STATUSES: { value: AssetStatus; label: string }[] = [
   { value: 'available',   label: 'Available' },

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser, TeamMember } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser, TeamMember } from '../../../lib/types'
 
 const PRESET_GAUGES = ['Visual', 'GAU01', 'GAU02', 'GAU03', 'GAU04', 'GAU05', 'GAU06', 'GAU07', 'GAU08', 'GAU09', 'GAU10', 'GAU11', 'GAU12', 'GAU13', 'GAU14', 'GAU15']
 

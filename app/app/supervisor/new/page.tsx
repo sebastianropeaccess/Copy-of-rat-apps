@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import { getSupabase } from '@/lib/supabase'
-import type { RatUser, TeamMember } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { RatUser, TeamMember } from '../../../lib/types'
 
 const SERVICE_TYPE_OPTIONS = [
   'Window Cleaning',

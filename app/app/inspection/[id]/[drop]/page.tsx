@@ -3,9 +3,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser } from '@/lib/helpers'
-import type { FacadeInspection, FacadeDefect, RatUser } from '@/lib/types'
+import { getSupabase } from '../../../../lib/supabase'
+import { getStoredUser } from '../../../../lib/helpers'
+import type { FacadeInspection, FacadeDefect, RatUser } from '../../../../lib/types'
 
 const SUB_TYPE_MAP: Record<string, string[]> = {
   Concrete: ['Spalling', 'Cracking', 'Bar Ends', 'Rust Spot'],

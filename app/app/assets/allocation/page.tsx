@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getAllocationQueue, setAllocationQueue } from '@/lib/helpers'
-import type { RatUser, Asset } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser, getAllocationQueue, setAllocationQueue } from '../../../lib/helpers'
+import type { RatUser, Asset } from '../../../lib/types'
 
 const STATUS_CONFIG: Record<string, { label: string; bg: string; text: string }> = {
   available:  { label: 'Available',  bg: 'bg-green-100',  text: 'text-green-700' },

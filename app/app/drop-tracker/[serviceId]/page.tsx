@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback, use } from 'react'
 import Link from 'next/link'
-import { getSupabase } from '@/lib/supabase'
-import { getStoredUser, getDropLabel, displayName } from '@/lib/helpers'
-import type { Service, DropEntry, RatUser } from '@/lib/types'
+import { getSupabase } from '../../../lib/supabase'
+import { getStoredUser, getDropLabel, displayName } from '../../../lib/helpers'
+import type { Service, DropEntry, RatUser } from '../../../lib/types'
 
 export default function DropGridPage({ params }: { params: Promise<{ serviceId: string }> }) {
   const { serviceId } = use(params)

@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { getStoredUser } from '@/lib/helpers'
-import type { RatUser } from '@/lib/types'
+import { getStoredUser } from '../../../lib/helpers'
+import type { RatUser } from '../../../lib/types'
 
 const SERVICE_OPTIONS = [
   'Height Safety Install', 'Height Safety Certification', 'Concrete Repairs',

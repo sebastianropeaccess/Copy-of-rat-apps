@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState, useCallback, use } from 'react'
-import { getSupabase } from '@/lib/supabase'
-import type { TeamMember } from '@/lib/types'
-import { setStoredUser } from '@/lib/helpers'
+import { getSupabase } from '../../../lib/supabase'
+import type { TeamMember } from '../../../lib/types'
+import { setStoredUser } from '../../../lib/helpers'
 
 export default function PinPage({ params }: { params: Promise<{ memberId: string }> }) {
   const { memberId } = use(params)
