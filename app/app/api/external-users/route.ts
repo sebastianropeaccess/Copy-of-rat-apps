@@ -89,16 +89,25 @@ function validatePayload(payload: ExternalUserPayload, creating: boolean) {
   }
 }
 
-async function findAuthUserByEmail(supabase: SupabaseClient, email: string) {
+type AuthUserLite = {
+  id: string
+  email?: string
+  user_metadata?: Record<string, unknown> | null
+  banned_until?: string | null
+  last_sign_in_at?: string | null
+}
+
+async function findAuthUserByEmail(supabase: SupabaseClient, email: string): Promise<AuthUserLite | null> {
   let page = 1
   const perPage = 200
 
   while (page <= 20) {
     const { data, error } = await supabase.auth.admin.listUsers({ page, perPage })
     if (error) throw error
-    const found = data.users.find((user) => user.email?.toLowerCase() === email)
+    const users = (data?.users ?? []) as AuthUserLite[]
+    const found = users.find((user) => user.email?.toLowerCase() === email)
     if (found) return found
-    if (data.users.length < perPage) return null
+    if (users.length < perPage) return null
     page += 1
   }
 
@@ -123,10 +132,11 @@ async function ensureAuthUser(
       user_metadata: { external_access: true },
     })
     if (error) throw error
-    if (!authorised && data.user) {
-      await supabase.auth.admin.updateUserById(data.user.id, { ban_duration: '876000h' })
+    const createdUser = (data?.user ?? null) as AuthUserLite | null
+    if (!authorised && createdUser) {
+      await supabase.auth.admin.updateUserById(createdUser.id, { ban_duration: '876000h' })
     }
-    return data.user
+    return createdUser
   }
 
   const updates: Record<string, unknown> = {
@@ -139,7 +149,7 @@ async function ensureAuthUser(
 
   const { data, error } = await supabase.auth.admin.updateUserById(authUser.id, updates)
   if (error) throw error
-  return data.user
+  return (data?.user ?? null) as AuthUserLite | null
 }
 
 function withAuthStatus(records: ExternalUserRecord[], authUsers: { id: string; email?: string; banned_until?: string | null; last_sign_in_at?: string | null }[]) {
